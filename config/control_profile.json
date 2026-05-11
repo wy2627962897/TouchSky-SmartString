@@ -1,0 +1,9 @@
+{
+    "loop_interval": 0.04,
+    "send_interval": 0.06,
+    "max_tilt_angle": 45.0,
+    "dead_zone": 5.0,
+    "response_expo": 1.35,
+    "command_smoothing": 0.35,
+    "max_delta_per_tick": 20
+}

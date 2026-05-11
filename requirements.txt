@@ -1,0 +1,7 @@
+numpy
+scipy
+filterpy
+kivy
+pybluez
+plyer
+djitellopy
