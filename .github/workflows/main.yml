@@ -39,9 +39,11 @@ jobs:
 
       - name: Build with Buildozer
         run: |
-          # 这一步会自动下载 NDK/SDK，云端网络极速且稳定
-          # 使用 yes 自动同意所有 Android SDK 协议
-          yes | /home/runner/.local/bin/buildozer -v android debug
+          # 预先接受所有 SDK 许可，避免使用管道
+          mkdir -p ~/.android
+          touch ~/.android/repositories.cfg
+          # 直接运行 buildozer，因为已经在 spec 里设置了同意许可
+          /home/runner/.local/bin/buildozer -v android debug
         continue-on-error: false
 
       - name: Upload APK
