@@ -39,12 +39,18 @@ jobs:
 
       - name: Build with Buildozer
         run: |
-          # 预先接受所有 SDK 许可，避免使用管道
-          mkdir -p ~/.android
-          touch ~/.android/repositories.cfg
-          # 直接运行 buildozer，因为已经在 spec 里设置了同意许可
+          # 1. 创建 SDK 协议目录
+          mkdir -p /home/runner/.buildozer/android/platform/android-sdk/licenses
+          
+          # 2. 写入所有已知的 Android SDK 协议 Hash
+          # 这相当于手动点击了所有“我同意”
+          echo -e "8933bad161af4178b1185d1a37fbf41ea5269c55\nd56f5187479451eabf01fb743e5023a2a821c3d0\n24333f8a63b6825ea9c5573f435dd901775b9f9b" > /home/runner/.buildozer/android/platform/android-sdk/licenses/android-sdk-license
+          echo -e "84831b9409646a918e30573bab4c9c91346d8abd\n5046675910430c56a5a8494af44569530fe5610b" > /home/runner/.buildozer/android/platform/android-sdk/licenses/android-googletv-license
+          echo -e "338391812fce9e8072a132fa7d12148464403028\ney8391812fce9e8072a132fa7d12148464403028" > /home/runner/.buildozer/android/platform/android-sdk/licenses/android-sdk-preview-license
+          
+          # 3. 运行编译
+          # 使用 --profile 可以在报错时看到更详细的信息
           /home/runner/.local/bin/buildozer -v android debug
-        continue-on-error: false
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
