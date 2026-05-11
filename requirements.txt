@@ -1,7 +1,2 @@
-numpy
-scipy
-filterpy
-kivy
-pybluez
-plyer
-djitellopy
+requirements = python3,kivy,plyer,numpy,djitellopy,scipy,filterpy,pybluez
+
